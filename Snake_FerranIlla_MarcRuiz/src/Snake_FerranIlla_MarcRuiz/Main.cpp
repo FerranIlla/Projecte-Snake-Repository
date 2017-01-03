@@ -1,13 +1,12 @@
-#include <iostream>
-#include <string>
-#include <stdio.h>
 #include "GameEngine.hh"
 
 
 //Screen dimension constants
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+#define SCREEN_WIDTH  640
+#define SCREEN_HEIGHT  480
+
 //Button apple pointer position
+
 const int BUTTON_POINTER_XPOS_RIGHT = 170;
 const int BUTTON_POINTER_YPOS = 77;
 const int EXIT_BUTTON_POINTER_YPOS = SCREEN_HEIGHT - 120;
