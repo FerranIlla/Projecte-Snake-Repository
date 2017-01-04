@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.hh" />
+    <ClInclude Include="ID.hh" />
     <ClInclude Include="InputManager.hh" />
     <ClInclude Include="IOManager.hh" />
     <ClInclude Include="Renderer.hh" />
