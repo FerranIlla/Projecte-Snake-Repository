@@ -1,5 +1,5 @@
 #include "GameEngine.hh"
-
+#include "IOManager.hh"
 
 //Screen dimension constants
 #define SCREEN_WIDTH  640
@@ -34,6 +34,7 @@ int main(int argc, char* args[]) {
 
 	gameLoop();
 	close(); //Free resources and close SDL
+	testXml("../res/test.xml", "1");
 	return 0;
 }
 
