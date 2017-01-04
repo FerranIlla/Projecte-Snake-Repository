@@ -121,6 +121,7 @@
     <ClInclude Include="InputManager.hh" />
     <ClInclude Include="IOManager.hh" />
     <ClInclude Include="Renderer.hh" />
+    <ClInclude Include="Transform.hh" />
     <ClInclude Include="Window.hh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
