@@ -75,7 +75,9 @@ void testXml(const std::string &filename, std::string diff) {
 			rapidxml::xml_node<> *pInc = pNode->first_node("incrementAliments");
 			iI = pInc->value();
 			evolveI = atoi(iI.c_str());
-			//std::cout  << numRows << "FUNCIONA" << std::endl;
+			std::cout  << numRows << "FUNCIONA" << std::endl;
+
+			break;
 		}
 
 		/*//medium stats
