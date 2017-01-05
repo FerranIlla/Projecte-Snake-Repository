@@ -144,4 +144,3 @@ void testXml(const std::string &filename, std::string diff) {
 
 
 
-	testXml("../res/test.xml", "1")
