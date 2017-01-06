@@ -121,7 +121,10 @@
     <ClInclude Include="ID.hh" />
     <ClInclude Include="InputManager.hh" />
     <ClInclude Include="IOManager.hh" />
+    <ClInclude Include="MenuScene.hh" />
     <ClInclude Include="Renderer.hh" />
+    <ClInclude Include="Scene.hh" />
+    <ClInclude Include="SceneManager.hh" />
     <ClInclude Include="Transform.hh" />
     <ClInclude Include="Window.hh" />
   </ItemGroup>
