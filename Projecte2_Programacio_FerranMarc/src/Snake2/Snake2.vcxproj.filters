@@ -14,4 +14,21 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <ClCompile Include="Main.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+<<<<<<< HEAD
+    <ClInclude Include="snake.hh">
+=======
+    <ClInclude Include="GameEngine.hh">
+>>>>>>> origin/master
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+>>>>>>> origin/master
 </Project>
