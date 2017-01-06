@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{95107D0C-C598-4A28-BF7B-7EBF38EF41D8}</ProjectGuid>
+    <ProjectGuid>{0B1DD7AA-DD0C-4EC9-B8A9-774F78D449FC}</ProjectGuid>
     <RootNamespace>Snake2</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -110,10 +110,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GameEngine.hh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
