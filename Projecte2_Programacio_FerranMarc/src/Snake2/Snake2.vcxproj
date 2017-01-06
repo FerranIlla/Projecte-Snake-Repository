@@ -114,7 +114,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="snake.hh" />
+    <ClCompile Include="Main.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameEngine.hh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
