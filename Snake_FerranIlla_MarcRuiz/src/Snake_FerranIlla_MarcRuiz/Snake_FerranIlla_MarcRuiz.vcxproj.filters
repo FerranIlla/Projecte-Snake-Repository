@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameEngine.hh">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.hh">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.hh">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.hh">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="ID.hh">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.hh">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="IOManager.hh">
+      <Filter>Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Model">
+      <UniqueIdentifier>{ddbfe285-f49b-4b60-a92b-ca3429cc47ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{27a6521e-cd7a-42cc-aadc-923c38842ecc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View">
+      <UniqueIdentifier>{4c6baa17-5d95-4aba-a988-b776d541d045}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controller">
+      <UniqueIdentifier>{ac5541a5-f424-476d-b537-f16b6f112736}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
