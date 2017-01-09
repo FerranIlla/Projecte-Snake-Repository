@@ -15,6 +15,7 @@
 #include "Snake.hh"
 #include "SceneManager.hh"
 #include "Wall.hh"
+#include "Food.hh"
 using namespace std;
 
 
@@ -51,13 +52,13 @@ void Run(string name, int screenWidth, int screenHeight) {
 
 	Wall::Instance(wallXML);
 	//gameLoop
-	float lastUpdateTime = SDL_GetTicks();
+	Uint32 lastUpdateTime = SDL_GetTicks();
 	int lastInput = 0; //RIGHT
 	int prohibitedDirection = 2; //LEFT
 	while (lastInput != EXIT) { //EXIT = 4;
 		keyboardInput(lastInput, prohibitedDirection);
 		//UPDATE
-		if (SDL_GetTicks() - lastUpdateTime > 1000 / speedXML) { //RESTAR LA VELOCITAT DE XML!!!!!!!!!!!!!!!!!!
+		if (SDL_GetTicks() - lastUpdateTime > 1000 / speedXML) { 
 			S.moveSnake(lastInput);
 			lastUpdateTime = SDL_GetTicks();
 			switch (lastInput) {
@@ -66,11 +67,12 @@ void Run(string name, int screenWidth, int screenHeight) {
 			case LEFT: prohibitedDirection = RIGHT; break;
 			case UP: prohibitedDirection = DOWN; break;
 			}
+			F.respawnFood(W.getWallCoor(), S.getSnakeCoor());
 		}
 		//DRAW
 		SDL_RenderClear(R.GetRenderer());
 		S.renderSnake();
-		//F.renderFood();
+		F.renderFood();
 		W.renderWall();
 		SDL_RenderPresent(R.GetRenderer());
 
