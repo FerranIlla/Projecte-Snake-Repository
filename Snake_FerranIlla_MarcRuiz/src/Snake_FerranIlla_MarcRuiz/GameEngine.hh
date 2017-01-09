@@ -49,7 +49,7 @@ void Run(string name, int screenWidth, int screenHeight) {
 	int temporalWallSize = 1;
 	int temporalSpeed = 10; //10(easy), 20, 30(hard)
 
-	Wall::Instance(temporalWallSize);
+	Wall::Instance(wallXML);
 	//gameLoop
 	float lastUpdateTime = SDL_GetTicks();
 	int lastInput = 0; //RIGHT
@@ -57,7 +57,7 @@ void Run(string name, int screenWidth, int screenHeight) {
 	while (lastInput != EXIT) { //EXIT = 4;
 		keyboardInput(lastInput, prohibitedDirection);
 		//UPDATE
-		if (SDL_GetTicks() - lastUpdateTime > 1000 / temporalSpeed) { //RESTAR LA VELOCITAT DE XML!!!!!!!!!!!!!!!!!!
+		if (SDL_GetTicks() - lastUpdateTime > 1000 / speedXML) { //RESTAR LA VELOCITAT DE XML!!!!!!!!!!!!!!!!!!
 			S.moveSnake(lastInput);
 			lastUpdateTime = SDL_GetTicks();
 			switch (lastInput) {

@@ -1,0 +1,10 @@
+﻿  Main.cpp
+c:\users\marc\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\menuscene.hh(15): warning C4805: '==': combinación no segura del tipo 'SDL_Keycode' y el tipo 'bool' en la operación
+c:\users\marc\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\menuscene.hh(47): warning C4551: la llamada a la función no tiene lista de argumentos
+c:\users\marc\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\wall.hh(9): warning C4005: 'W': redefinición de macro
+  c:\users\marc\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\window.hh(5): note: vea la definición anterior de 'W'
+c:\users\marc\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\gameengine.hh(54): warning C4244: 'inicializando': conversión de 'Uint32' a 'float'; posible pérdida de datos
+c:\users\marc\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\gameengine.hh(62): warning C4244: '=': conversión de 'Uint32' a 'float'; posible pérdida de datos
+  Snake_FerranIlla_MarcRuiz.vcxproj -> C:\Users\marc\Documents\GitHub\Projecte-Snake-Repository\Snake_FerranIlla_MarcRuiz\\bin\x64Debug\Snake_FerranIlla_MarcRuiz.exe
+  Snake_FerranIlla_MarcRuiz.vcxproj -> C:\Users\marc\Documents\GitHub\Projecte-Snake-Repository\Snake_FerranIlla_MarcRuiz\\bin\x64Debug\Snake_FerranIlla_MarcRuiz.pdb (Partial PDB)
+  0 archivo(s) copiado(s)

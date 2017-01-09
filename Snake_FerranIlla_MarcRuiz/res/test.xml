@@ -2,30 +2,27 @@
 <difficultMode>
 	<MODE difficult = "facil">
 		
-		<numCol>5</numCol>
-		<numRow>5</numRow>
+		<wallSize>1</wallSize>
 		<time>4</time>
-		<vInicial>1</vInicial>
+		<vInicial>10</vInicial>
     		<alimentsInicials>1</alimentsInicials>
    		<incrementAliments>1</incrementAliments>	
 	</MODE>
   
 	<MODE difficult ="medio">
   
-      		<numCol>2</numCol>
-      		<numRow>2</numRow>
+      		<wallSize>5</wallSize>
     		<time>2</time>
-    		<vInicial>2</vInicial>
+    		<vInicial>15</vInicial>
     		<alimentsInicials>2</alimentsInicials>
     		<incrementAliments>2</incrementAliments>
   	</MODE>
   
 	<MODE difficult ="dificil">
     
-     		<numCol>1</numCol>
-      		<numRow>1</numRow>
+     		<wallSize>10</wallSize>
     		<time>1</time>
-    		<vInicial>4</vInicial>
+    		<vInicial>20</vInicial>
     		<alimentsInicials>3</alimentsInicials>
     		<incrementAliments>3</incrementAliments>
   	</MODE>

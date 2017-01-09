@@ -9,7 +9,7 @@
 #include <XML\rapidxml_print.hpp>
 #include <XML\rapidxml_utils.hpp>
 
-int timeXML, speedXML, foodXML, incrementXML, numColumnsXML, numRowsXML;
+int timeXML, speedXML, foodXML, incrementXML, wallXML;
 
 void readDifficultyXml(int diff) {
 	rapidxml::file<> xmlFile("../../res/test.xml");//carrega el fitxer xml amb la ruta especifcada
@@ -19,7 +19,7 @@ void readDifficultyXml(int diff) {
 	rapidxml::xml_node<> *pRoot = doc.first_node("difficultMode");
 
 	std::string tmp, vI, aI, iI;//temps, velocitat, aliments, increment
-	std::string columns, rows;
+	std::string wall;
 
 
 
@@ -28,16 +28,10 @@ void readDifficultyXml(int diff) {
 		std::string atr;
 		atr = pAttr->value();
 		if (atr == "facil" && diff == 0) { //easy difficulty
-			rapidxml::xml_node<> *pColumns = pNode->first_node("numCol");//agafo lstring de columnes i el guardo com un int
-			columns = pColumns->value();
-			numColumnsXML = atoi(columns.c_str());
-			//std::cout << "nombre de columnes: " << numColumnsXML << std::endl;
-
-			rapidxml::xml_node<> *pRows = pNode->first_node("numRow");
-			rows = pRows->value();
-			numRowsXML = atoi(rows.c_str());
-			//std::cout << "nombre de fileres: " << numRowsXML << std::endl;
-
+			rapidxml::xml_node<> *pWall = pNode->first_node("wallSize");//agafo lstring de columnes i el guardo com un int
+			wall = pWall->value();
+			wallXML = atoi(wall.c_str());
+			
 			rapidxml::xml_node<> *pTemps = pNode->first_node("time");
 			tmp = pTemps->value();
 			timeXML = atoi(tmp.c_str());
@@ -60,15 +54,9 @@ void readDifficultyXml(int diff) {
 			break;
 		}
 		else if (atr == "medio" && diff == 1) { //normal difficulty
-			rapidxml::xml_node<> *pColumns1 = pNode->first_node("numCol");//agafo lstring de columnes i el guardo com un int
-			columns = pColumns1->value();
-			numColumnsXML = atoi(columns.c_str());
-			//std::cout << "nombre de columnes: " << numColumnsXML << std::endl;
-
-			rapidxml::xml_node<> *pRows = pNode->first_node("numRow");
-			rows = pRows->value();
-			numRowsXML = atoi(rows.c_str());
-			//std::cout << "el nombre de files son: " << numRowsXML << std::endl;
+			rapidxml::xml_node<> *pWall = pNode->first_node("wallSize");//agafo lstring de columnes i el guardo com un int
+			wall = pWall->value();
+			wallXML = atoi(wall.c_str());
 
 			rapidxml::xml_node<> *pTemps1 = pNode->first_node("time");
 			tmp = pTemps1->value();
@@ -95,15 +83,9 @@ void readDifficultyXml(int diff) {
 
 		//hard stats
 		if (atr == "dificil" && diff == 2) { //hard difficulty
-			rapidxml::xml_node<> *pColumns = pNode->first_node("numCol");//agafo lstring de columnes i el guardo com un int
-			columns = pColumns->value();
-			numColumnsXML = atoi(columns.c_str());
-			//std::cout << "nombre de columnes: " << numColumnsXML << std::endl;
-
-			rapidxml::xml_node<> *pRows = pNode->first_node("numRow");
-			rows = pRows->value();
-			numRowsXML = atoi(rows.c_str());
-			//std::cout << "el nombre de files son: " << numRowsXML << std::endl;
+			rapidxml::xml_node<> *pWall = pNode->first_node("wallSize");//agafo lstring de columnes i el guardo com un int
+			wall = pWall->value();
+			wallXML = atoi(wall.c_str());
 
 			rapidxml::xml_node<> *pTemps = pNode->first_node("time");
 			tmp = pTemps->value();
