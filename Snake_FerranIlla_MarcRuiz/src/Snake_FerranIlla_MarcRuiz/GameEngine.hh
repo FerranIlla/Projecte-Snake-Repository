@@ -44,17 +44,7 @@ void Run(string name, int screenWidth, int screenHeight) {
 	//timeXML, speedXML, foodXML, numColumnsXML, numRowsXML, incrementXML);
 
 	Wall::Instance(wallXML);
-
-	
-	//render text
-	SDL_Color textColor = { 255, 255, 255 };
-	SDL_Surface* textSurface = TTF_RenderText_Solid(R.GetFont<ARIAL>(), "HOLA HOLA HOLAAA", textColor);
-	//Create texture from surface pixels
-	SDL_Texture* mTexture = SDL_CreateTextureFromSurface(R.GetRenderer(), textSurface);
-	SDL_FreeSurface(textSurface);
-	SDL_Rect textRect;
-	textRect.x = 50, textRect.y = 50;
-	textRect.w = 300, textRect.h = 100;
+	cout << speedXML << endl;
 
 	//gameLoop
 	Uint32 lastUpdateTime = SDL_GetTicks();
@@ -65,7 +55,7 @@ void Run(string name, int screenWidth, int screenHeight) {
 		keyboardInput(lastInput, prohibitedDirection); //InputManager.hh
 
 		//UPDATE
-		if (SDL_GetTicks() - lastUpdateTime > 1000 / speedXML) { 
+		if ((SDL_GetTicks() - lastUpdateTime) > 1000 / speedXML) { 
 			//check collisions
 			if (snakeCollides()) {
 				cout << "snake has collided" << endl;

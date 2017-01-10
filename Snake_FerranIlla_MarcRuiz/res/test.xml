@@ -13,7 +13,7 @@
   
       		<wallSize>7</wallSize>
     		<time>2</time>
-    		<vInicial>15</vInicial>
+    		<vInicial>20</vInicial>
     		<alimentsInicials>2</alimentsInicials>
     		<incrementAliments>2</incrementAliments>
   	</MODE>
@@ -22,7 +22,7 @@
     
      		<wallSize>13</wallSize>
     		<time>1</time>
-    		<vInicial>20</vInicial>
+    		<vInicial>200</vInicial>
     		<alimentsInicials>3</alimentsInicials>
     		<incrementAliments>3</incrementAliments>
   	</MODE>
