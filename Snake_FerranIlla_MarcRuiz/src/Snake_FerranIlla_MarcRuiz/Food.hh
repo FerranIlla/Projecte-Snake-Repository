@@ -5,6 +5,7 @@
 #include "Renderer.hh"
 #include <stdlib.h>
 #include <algorithm>
+#include <time.h>
 
 using namespace std;
 
@@ -17,6 +18,8 @@ class Food {
 	Food(int maxFood) {
 		foodCoor = { 45,25 };
 		counterFoodLeft = maxFood;
+		srand(time(nullptr));
+
 	}
 public:
 	inline static Food &Instance(int maxFood = 0) {
@@ -63,7 +66,6 @@ public:
 		for (int i = 0; i < freePositions.size(); ++i) {
 			cout << freePositions[i].column << "," << freePositions[i].row << " ";
 		}*/
-
 		int randomNumber = rand() % (freePositions.size()-1);
 		foodCoor.column = freePositions[randomNumber].column;
 		foodCoor.row = freePositions[randomNumber].row;

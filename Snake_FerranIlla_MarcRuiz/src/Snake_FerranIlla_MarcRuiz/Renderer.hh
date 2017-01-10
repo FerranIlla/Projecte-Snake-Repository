@@ -30,7 +30,7 @@ class Renderer {
 		//Initialize PNG loading
 		constexpr int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
 		(IMG_Init(imgFlags) & imgFlags);
-		//TTF_Init() != -1;
+		TTF_Init();
 	}
 
 public:
@@ -42,10 +42,10 @@ public:
 		if (!m_textureData.empty()) {
 			for (auto &t : m_textureData) SDL_DestroyTexture(t.second), t.second = nullptr;
 		}
-		//for (auto &f : m_fontData) TTF_CloseFont(f.second), f.second = nullptr;
+		for (auto &f : m_fontData) TTF_CloseFont(f.second), f.second = nullptr;
 		SDL_DestroyRenderer(m_SDLRenderer), m_SDLRenderer = nullptr;
 		IMG_Quit();
-		//TTF_Quit();
+		TTF_Quit();
 	}
 	template<ObjectID objectID>
 	void LoadTexture(string &&filename) {
@@ -61,40 +61,27 @@ public:
 
 		SDL_FreeSurface(loadedSurface); //Get rid of loaded surface
 	}
-	/*
+	
 	#pragma region
-	template<FontID fontID> void LoadFont(std::string &&filename, int size) {
-		ASSERT_MSG(m_fontData.emplace(fontID, TTF_OpenFont(RESOURCE_FILE(filename), size)).second, "Unable to create font from " + filename);
+	template<FontID fontID> void LoadFont(string &&filename, int size) {
+		m_fontData.emplace(fontID, TTF_OpenFont(filename.c_str(), size)).second;
 	}
 	template<FontID fontID> inline TTF_Font *GetFont() {
 		return m_fontData[fontID];
 	}
-	template<FontID fontID, FontStyle style> void SetFontStyle() {
+	template<FontID fontID, int style> void SetFontStyle() {
 		TTF_SetFontStyle(m_fontData[fontID], style);
 	}
 	#pragma endregion fonts
-	*/
+	
 
-	void Push(SDL_Surface *surface, Transform &transform) {
-		//if (surface != nullptr)
-		auto texture = SDL_CreateTextureFromSurface(m_SDLRenderer, surface);
-		transform.x -= surface->w / 2;
-		transform.y -= surface->h / 2;
-		transform.w *= surface->w;
-		transform.h *= surface->h;
-		SDL_RenderCopy(m_SDLRenderer, texture, nullptr, &transform());
-		SDL_FreeSurface(surface);
-		SDL_DestroyTexture(texture);
-	}
-	void Push(const ObjectID &objectID, const Transform &transform) {
-		SDL_RenderCopy(m_SDLRenderer, m_textureData[objectID], nullptr, &transform());
-	}
 	inline SDL_Renderer* GetRenderer() const { return m_SDLRenderer; }
 	void Clear() const { SDL_RenderClear(m_SDLRenderer); };
 	void Render() const { SDL_RenderPresent(m_SDLRenderer); };
+
 	unordered_map<ObjectID, SDL_Texture*> m_textureData;
+
 private:
-	
-	//std::unordered_map<FontID, TTF_Font*> m_fontData;
+	unordered_map<FontID, TTF_Font*> m_fontData;
 	SDL_Renderer* m_SDLRenderer{ nullptr };
 };

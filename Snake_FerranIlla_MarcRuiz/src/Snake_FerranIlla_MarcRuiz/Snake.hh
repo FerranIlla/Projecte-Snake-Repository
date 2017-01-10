@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include <SDL\SDL.h>
 #include "Coordinates.hh"
 
@@ -10,6 +11,7 @@ using namespace std;
 class Snake {
 	vector<COOR> snakePosition; //last element is the snake head
 	int lives;
+	int score;
 
 	Snake() {
 		snakePosition.push_back({ 17,18 });
@@ -17,6 +19,7 @@ class Snake {
 		snakePosition.push_back({ 19,18 });
 		snakePosition.push_back({ 20,18 });
 		lives = 3;
+		score = 0;
 	}
 public:
 	inline static Snake &Instance(void) {
@@ -108,13 +111,37 @@ public:
 	void renderLives() {
 		SDL_Rect textureSize;
 		textureSize.w = textureSize.h = 20;
-		textureSize.y = 3;
-		if (lives >= 1) textureSize.x = 5 * 10;	SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::HEART], nullptr, &textureSize);
-		if (lives >= 2) textureSize.x = 8 * 10; SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::HEART], nullptr, &textureSize);
-		if(lives >=3) textureSize.x = 11 * 10; SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::HEART], nullptr, &textureSize);
+		textureSize.y = 0;
+		if (lives >= 1) textureSize.x = 10 * 10;	SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::HEART], nullptr, &textureSize);
+		if (lives >= 2) textureSize.x = 13 * 10; SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::HEART], nullptr, &textureSize);
+		if(lives >=3) textureSize.x = 16 * 10; SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::HEART], nullptr, &textureSize);
 
 
 	}
 
+	void renderScore() {
+		SDL_Color textColor = { 255, 255, 255 };
+		SDL_Rect textPos;
+		SDL_Surface* tSurface1 = TTF_RenderText_Solid(R.GetFont<ARIAL>(), "SCORE: ", textColor);
+		SDL_Texture* scoreTextTexture = SDL_CreateTextureFromSurface(R.GetRenderer(), tSurface1);
+		textPos.x = 45 * 10, textPos.y = 0 * 10;
+		textPos.w = 70, textPos.h = 20;
+		SDL_RenderCopy(R.GetRenderer(), scoreTextTexture, nullptr, &textPos);
 
+		SDL_Surface* tSurface2 = TTF_RenderText_Solid(R.GetFont<ARIAL>(), to_string(score).c_str(), textColor);
+		SDL_Texture* scoreNumbTexture = SDL_CreateTextureFromSurface(R.GetRenderer(), tSurface2);
+		textPos.x = textPos.x+75, textPos.y = 0 * 10;
+		textPos.w = 10, textPos.h = 20;
+		SDL_RenderCopy(R.GetRenderer(), scoreNumbTexture, nullptr, &textPos);
+	}
+
+	void renderEndText() {
+		SDL_Color textColor = { 255, 255, 255 };
+		SDL_Rect textPos;
+		SDL_Surface* textSurface = TTF_RenderText_Solid(R.GetFont<ARIAL>(), "GAME OVER", textColor);
+		SDL_Texture* scoreTextTexture = SDL_CreateTextureFromSurface(R.GetRenderer(), textSurface);
+		textPos.x = 21 * 10, textPos.y = 16 * 10;
+		textPos.w = 215, textPos.h = 16 * 10;
+		SDL_RenderCopy(R.GetRenderer(), scoreTextTexture, nullptr, &textPos);
+	}
 };

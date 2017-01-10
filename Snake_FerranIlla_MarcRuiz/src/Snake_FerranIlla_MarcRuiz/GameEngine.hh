@@ -21,9 +21,8 @@ using namespace std;
 
 
 void LoadMedia(void) {
-	/*R.LoadFont<FontID::ARIAL>("fnt/arial.ttf", 40);
-	R.LoadFont<FontID::CANDY>("fnt/candy.ttf", 50);
-	R.LoadFont<FontID::FACTORY>("fnt/candsb.ttf", 80);*/
+	R.LoadFont<FontID::ARIAL>("../../res/fnt/arial.ttf", 40);
+	R.SetFontStyle<ARIAL, 1>();
 	R.LoadTexture<ObjectID::FOOD>("../../res/gfx/apple.png");
 	R.LoadTexture<ObjectID::MENU>("../../res/gfx/menu.png");
 	R.LoadTexture<ObjectID::SNAKE_BODY>("../../res/gfx/snakeBody.png");
@@ -31,19 +30,15 @@ void LoadMedia(void) {
 	R.LoadTexture<ObjectID::WALL>("../../res/gfx/wall.png");
 	R.LoadTexture<ObjectID::HEART>("../../res/gfx/life.png");
 }
-//addScenes(){} function ----easy, normal, hard 
+
 
 
 void Run(string name, int screenWidth, int screenHeight) {
 
 	Window::Instance(move(name), move(screenWidth), move(screenHeight)); // Initialize window Singleton instance for the first time
 	LoadMedia(); // Initialize renderer Singleton instance for the first time and load images
-	//addScenes();
-
 
 	int gameScene; //0=easy, 1=normal, 2=hard, 3=exit;
-
-
 	menuLoop(gameScene); //entra al menu
 	readDifficultyXml(gameScene); //agafa les dades de xml
 	//timeXML, speedXML, foodXML, numColumnsXML, numRowsXML, incrementXML);
@@ -51,7 +46,15 @@ void Run(string name, int screenWidth, int screenHeight) {
 	Wall::Instance(wallXML);
 
 	
-
+	//render text
+	SDL_Color textColor = { 255, 255, 255 };
+	SDL_Surface* textSurface = TTF_RenderText_Solid(R.GetFont<ARIAL>(), "HOLA HOLA HOLAAA", textColor);
+	//Create texture from surface pixels
+	SDL_Texture* mTexture = SDL_CreateTextureFromSurface(R.GetRenderer(), textSurface);
+	SDL_FreeSurface(textSurface);
+	SDL_Rect textRect;
+	textRect.x = 50, textRect.y = 50;
+	textRect.w = 300, textRect.h = 100;
 
 	//gameLoop
 	Uint32 lastUpdateTime = SDL_GetTicks();
@@ -66,6 +69,11 @@ void Run(string name, int screenWidth, int screenHeight) {
 			//check collisions
 			if (snakeCollides()) {
 				cout << "snake has collided" << endl;
+				if (S.getLives() <= 1) {
+					S.renderEndText();
+					SDL_RenderPresent(R.GetRenderer());
+					SDL_Delay(1000);
+				}
 				SDL_Delay(2000);
 				S.restartSnake();
 				F.restartFood();
@@ -94,6 +102,7 @@ void Run(string name, int screenWidth, int screenHeight) {
 		S.renderSnake();
 		WA.renderWall();
 		S.renderLives();
+		S.renderScore();
 		SDL_RenderPresent(R.GetRenderer());
 
 
