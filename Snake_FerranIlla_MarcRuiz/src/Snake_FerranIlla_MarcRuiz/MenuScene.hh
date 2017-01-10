@@ -18,7 +18,7 @@ bool acceptKeyDown(SDL_Event evnt) {
 void menuLoop(int &choice) {
 	bool quit = false; //Main loop flag
 	SDL_Event e; //Event handler
-	int pointerState = SELECT_EASY; //posició de l'apuntador del menu
+	int pointerState = SELECT_EASY; //selector position
 
 	SDL_Rect pointerScreenPosition; //Info about the pointer position
 	pointerScreenPosition.h = 40;
@@ -53,11 +53,11 @@ void menuLoop(int &choice) {
 		SDL_RenderClear(R.GetRenderer()); //Clear screen
 		SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::MENU], nullptr, nullptr); //Render texture to screen
 
-																   //Update apple-pointer yPos.
+		//Update apple-pointer yPos.
 		pointerScreenPosition.y = BUTTON_POINTER_YPOS * (pointerState + 1);
 		if (pointerState == 3) pointerScreenPosition.y = EXIT_BUTTON_POINTER_YPOS;
 
 		SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::FOOD], nullptr, &pointerScreenPosition); //Render apple to screen
-		SDL_RenderPresent(R.GetRenderer()); 		//Update the screen
+		SDL_RenderPresent(R.GetRenderer()); //Update the screen
 	}
 }

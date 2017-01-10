@@ -4,21 +4,10 @@
 #include <SDL/SDL_ttf.h>
 #include <unordered_map>
 #include "Window.hh"
-//#include "Color.hh"
 #include "ID.hh"
-//#include "Resource.hh"
-#include "Transform.hh"
 using namespace std;
 
 #define R Renderer::Instance()
-
-// Enum to store text font style
-//enum FontStyle {
-//	FONT_STYLE_BOLD = TTF_STYLE_BOLD,
-//	FONT_STYLE_ITALIC = TTF_STYLE_ITALIC,
-//	FONT_STYLE_UNDERLINE = TTF_STYLE_UNDERLINE,
-//	FONT_STYLE_NORMAL = TTF_STYLE_NORMAL
-//};
 
 // Renderer class
 class Renderer {

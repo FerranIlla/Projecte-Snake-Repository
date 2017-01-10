@@ -22,9 +22,6 @@
     <ClInclude Include="IOManager.hh">
       <Filter>Controller</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.hh">
-      <Filter>Model</Filter>
-    </ClInclude>
     <ClInclude Include="Snake.hh">
       <Filter>Model</Filter>
     </ClInclude>
@@ -35,9 +32,6 @@
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="Wall.hh">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Grid.hh">
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="MenuScene.hh">

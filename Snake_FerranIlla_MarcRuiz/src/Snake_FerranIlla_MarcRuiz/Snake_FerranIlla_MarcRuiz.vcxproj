@@ -121,14 +121,12 @@
     <ClInclude Include="Food.hh" />
     <ClInclude Include="GameEngine.hh" />
     <ClInclude Include="GameLoop.hh" />
-    <ClInclude Include="Grid.hh" />
     <ClInclude Include="ID.hh" />
     <ClInclude Include="InputManager.hh" />
     <ClInclude Include="IOManager.hh" />
     <ClInclude Include="MenuScene.hh" />
     <ClInclude Include="Renderer.hh" />
     <ClInclude Include="Snake.hh" />
-    <ClInclude Include="Transform.hh" />
     <ClInclude Include="Wall.hh" />
     <ClInclude Include="Window.hh" />
   </ItemGroup>

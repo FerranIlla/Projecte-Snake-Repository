@@ -43,13 +43,10 @@ public:
 			occupedPositions[i+wall.size()] = snake[i];
 		}
 
-		//ordenant de petit a gran
 		sort(occupedPositions.begin(), occupedPositions.end());
-		//he fet un cout, i està ordenat
 
 		vector<COOR> freePositions;
 		bool found = false;
-		//freePositions.resize(64 * 48 - occupedPositions.size());
 		int it = 0;
 		for (int i = 0; i < GRID_HEIGHT; ++i) {
 			for (int j = 0; j < GRID_WIDTH; ++j) {
@@ -62,10 +59,6 @@ public:
 			}
 		}
 		
-		/*cout << "freePositions vector: " << endl;
-		for (int i = 0; i < freePositions.size(); ++i) {
-			cout << freePositions[i].column << "," << freePositions[i].row << " ";
-		}*/
 		int randomNumber = rand() % (freePositions.size()-1);
 		foodCoor.column = freePositions[randomNumber].column;
 		foodCoor.row = freePositions[randomNumber].row;

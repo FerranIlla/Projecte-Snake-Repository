@@ -8,7 +8,6 @@ using namespace std;
 
 #define WA Wall::Instance()
 
-//TODO
 class Wall {
 	vector<COOR> wallPosition;
 

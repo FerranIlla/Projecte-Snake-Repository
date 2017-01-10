@@ -5,13 +5,11 @@
 #include <SDL\SDL_image.h>
 #include <iostream>
 #include <string>
-#include <stdio.h>
 #include "Window.hh"
 #include "Renderer.hh"
 #include "MenuScene.hh"
 #include "InputManager.hh"
 #include "IOManager.hh"
-#include "Grid.hh"
 #include "Snake.hh"
 #include "GameLoop.hh"
 #include "Wall.hh"
@@ -39,82 +37,72 @@ void Run(string name, int screenWidth, int screenHeight) {
 	LoadMedia(); // Initialize renderer Singleton instance for the first time and load images
 
 	int gameScene; //0=easy, 1=normal, 2=hard, 3=exit;
-	menuLoop(gameScene); //entra al menu
-	readDifficultyXml(gameScene); //agafa les dades de xml
-	//timeXML, speedXML, foodXML, numColumnsXML, numRowsXML, incrementXML);
+	menuLoop(gameScene); //menu scene
+	if (gameScene != 3) {
+		
+		readDifficultyXml(gameScene); //read data from xml -->timeXML, speedXML, foodXML, wallXML, incrementXML (some of these are not used)
 
-	Wall::Instance(wallXML);
-	cout << speedXML << endl;
+		Wall::Instance(wallXML); //Initialize Wall Singleton instance for the first time
+		
+		//gameLoop
+		Uint32 lastUpdateTime = SDL_GetTicks();
+		int lastInput = RIGHT; //enum moveDirection with RIGHT, DOWN, LEFT, UP, EXIT as value
+		int prohibitedDirection = LEFT; 
+		bool gameOver = false;
 
-	//gameLoop
-	Uint32 lastUpdateTime = SDL_GetTicks();
-	int lastInput = 0; //RIGHT
-	int prohibitedDirection = 2; //LEFT
+		while (lastInput != EXIT) {
+			keyboardInput(lastInput, prohibitedDirection);
 
-	while (lastInput != EXIT) { //EXIT = 4;
-		keyboardInput(lastInput, prohibitedDirection); //InputManager.hh
+			//UPDATE
+			if ((SDL_GetTicks() - lastUpdateTime) > 1000 / speedXML) { //the FPS varies with the speeedXML value
+				//check collisions
+				if (snakeCollides()) {
+					if (S.getLives() <= 1) {
+						S.renderEndText();
+						SDL_RenderPresent(R.GetRenderer());
+						SDL_Delay(2700);
+						S.score = 0;
+						lastInput = EXIT;
+						gameOver = true;
 
-		//UPDATE
-		if ((SDL_GetTicks() - lastUpdateTime) > 1000 / speedXML) { 
-			//check collisions
-			if (snakeCollides()) {
-				cout << "snake has collided" << endl;
-				if (S.getLives() <= 1) {
-					S.renderEndText();
-					SDL_RenderPresent(R.GetRenderer());
-					SDL_Delay(1000);
-					
+					}
+					if (!gameOver) {
+						SDL_Delay(2000);
+						S.restartSnake();
+						F.restartFood();
+						lastInput = RIGHT;
+					}
 				}
-				SDL_Delay(2000);
-				S.restartSnake();
-				F.restartFood();
-				lastInput = RIGHT;
+				//check if snake eats an apple
+				else if (snakeEats()) {
+					S.growSnake(lastInput);
+					S.score += 5;
+					F.respawnFood(WA.getWallCoor(), S.getSnakeCoor());
+				}
+				//move snake normally
+				else {
+					S.moveSnake(lastInput);
+				}
+				lastUpdateTime = SDL_GetTicks(); //update time flag
+				switch (lastInput) { //snake can't turn around through itself
+				case RIGHT: prohibitedDirection = LEFT; break;
+				case DOWN: prohibitedDirection = UP; break;
+				case LEFT: prohibitedDirection = RIGHT; break;
+				case UP: prohibitedDirection = DOWN; break;
+				}
 			}
-			else if (snakeEats()) {
-				S.growSnake(lastInput);
-				S.score += 5;
-				F.respawnFood(WA.getWallCoor(),S.getSnakeCoor());
-			}
-			else {
-				S.moveSnake(lastInput);
-			}
-			lastUpdateTime = SDL_GetTicks();
-			switch (lastInput) {
-			case RIGHT: prohibitedDirection = LEFT; break;
-			case DOWN: prohibitedDirection = UP; break;
-			case LEFT: prohibitedDirection = RIGHT; break;
-			case UP: prohibitedDirection = DOWN; break;
-			}
+
+			//DRAW
+			SDL_RenderClear(R.GetRenderer());
+			F.renderFood();
+			S.renderSnake();
+			WA.renderWall();
+			S.renderLives();
+			S.renderScore();
+			SDL_RenderPresent(R.GetRenderer());
+
 		}
-
-		//DRAW
-
-		SDL_RenderClear(R.GetRenderer());
-		F.renderFood();
-		S.renderSnake();
-		WA.renderWall();
-		S.renderLives();
-		S.renderScore();
-		SDL_RenderPresent(R.GetRenderer());
-
-
-
 	}
-	/*
-	Grid g;
-	cout << "AFTER GRID " << endl;
-	SDL_RenderClear(R.GetRenderer());
-	//g.renderGrid();
-	S.renderSnake();
-	SDL_Delay(2000);
-	for (int i = 0; i < 20; ++i) {
-		SDL_Delay(50);
-		SDL_RenderClear(R.GetRenderer());
-		S.moveSnake(RIGHT);
-		S.renderSnake();
-	}
-	SDL_Delay(2000);
-	*/
 
 
 }

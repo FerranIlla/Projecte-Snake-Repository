@@ -3,7 +3,7 @@ c:\users\ferran illa\documents\github\projecte-snake-repository\snake_ferranilla
 c:\users\ferran illa\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\menuscene.hh(47): warning C4551: function call missing argument list
 c:\users\ferran illa\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\snake.hh(136): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 c:\users\ferran illa\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\food.hh(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\ferran illa\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\gameengine.hh(58): warning C4018: '>': signed/unsigned mismatch
+c:\users\ferran illa\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\gameengine.hh(57): warning C4018: '>': signed/unsigned mismatch
   Snake_FerranIlla_MarcRuiz.vcxproj -> C:\Users\Ferran Illa\Documents\GitHub\Projecte-Snake-Repository\Snake_FerranIlla_MarcRuiz\\bin\x64Debug\Snake_FerranIlla_MarcRuiz.exe
   Snake_FerranIlla_MarcRuiz.vcxproj -> C:\Users\Ferran Illa\Documents\GitHub\Projecte-Snake-Repository\Snake_FerranIlla_MarcRuiz\\bin\x64Debug\Snake_FerranIlla_MarcRuiz.pdb (Partial PDB)
   0 archivo(s) copiado(s)

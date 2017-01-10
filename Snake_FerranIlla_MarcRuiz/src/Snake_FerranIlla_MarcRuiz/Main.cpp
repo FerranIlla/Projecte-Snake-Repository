@@ -4,8 +4,6 @@
 #define SCREEN_WIDTH  640
 #define SCREEN_HEIGHT  480
 
-//Hola aquest es el bo
-
 
 int main(int argc, char* args[]) {
 
