@@ -13,7 +13,7 @@
 #include "IOManager.hh"
 #include "Grid.hh"
 #include "Snake.hh"
-#include "SceneManager.hh"
+#include "GameLoop.hh"
 #include "Wall.hh"
 #include "Food.hh"
 using namespace std;
@@ -43,23 +43,41 @@ void Run(string name, int screenWidth, int screenHeight) {
 
 	int gameScene; //0=easy, 1=normal, 2=hard, 3=exit;
 
+
 	menuLoop(gameScene); //entra al menu
 	readDifficultyXml(gameScene); //agafa les dades de xml
 	//timeXML, speedXML, foodXML, numColumnsXML, numRowsXML, incrementXML);
-	//CAMBIAR numColumnsXML i numRowsXML PER int wallSize = {1(facil), 5(normal),10(hard)} 
-	int temporalWallSize = 1;
-	int temporalSpeed = 10; //10(easy), 20, 30(hard)
 
 	Wall::Instance(wallXML);
+
+	
+
+
 	//gameLoop
 	Uint32 lastUpdateTime = SDL_GetTicks();
 	int lastInput = 0; //RIGHT
 	int prohibitedDirection = 2; //LEFT
+
 	while (lastInput != EXIT) { //EXIT = 4;
-		keyboardInput(lastInput, prohibitedDirection);
+		keyboardInput(lastInput, prohibitedDirection); //InputManager.hh
+
 		//UPDATE
 		if (SDL_GetTicks() - lastUpdateTime > 1000 / speedXML) { 
-			S.moveSnake(lastInput);
+			//check collisions
+			if (snakeCollides()) {
+				cout << "snake has collided" << endl;
+				SDL_Delay(2000);
+				S.restartSnake();
+				F.restartFood();
+				lastInput = RIGHT;
+			}
+			else if (snakeEats()) {
+				S.growSnake(lastInput);
+				F.respawnFood(WA.getWallCoor(),S.getSnakeCoor());
+			}
+			else {
+				S.moveSnake(lastInput);
+			}
 			lastUpdateTime = SDL_GetTicks();
 			switch (lastInput) {
 			case RIGHT: prohibitedDirection = LEFT; break;
@@ -67,13 +85,15 @@ void Run(string name, int screenWidth, int screenHeight) {
 			case LEFT: prohibitedDirection = RIGHT; break;
 			case UP: prohibitedDirection = DOWN; break;
 			}
-			F.respawnFood(W.getWallCoor(), S.getSnakeCoor());
 		}
+
 		//DRAW
+
 		SDL_RenderClear(R.GetRenderer());
-		S.renderSnake();
 		F.renderFood();
-		W.renderWall();
+		S.renderSnake();
+		WA.renderWall();
+		S.renderLives();
 		SDL_RenderPresent(R.GetRenderer());
 
 

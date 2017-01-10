@@ -8,14 +8,15 @@ using namespace std;
 #define S Snake::Instance()
 
 class Snake {
-	vector<COOR> snakePosition;
+	vector<COOR> snakePosition; //last element is the snake head
+	int lives;
 
 	Snake() {
 		snakePosition.push_back({ 17,18 });
 		snakePosition.push_back({ 18,18 });
 		snakePosition.push_back({ 19,18 });
 		snakePosition.push_back({ 20,18 });
-
+		lives = 3;
 	}
 public:
 	inline static Snake &Instance(void) {
@@ -32,9 +33,11 @@ public:
 		return snakePosition;
 	}
 
+	int getLives() { return lives; }
+
 	void growSnake(int dir) {
-		int lastX = snakePosition.back().x;
-		int lastY = snakePosition.back().y;
+		int lastX = snakePosition.back().column;
+		int lastY = snakePosition.back().row;
 		COOR c;
 		switch (dir) {
 		case RIGHT:
@@ -58,8 +61,8 @@ public:
 
 	void moveSnake(int dir) {
 		snakePosition.erase(snakePosition.begin());
-		int lastX = snakePosition.back().x;
-		int lastY = snakePosition.back().y;
+		int lastX = snakePosition.back().column;
+		int lastY = snakePosition.back().row;
 		COOR c;
 		switch (dir){
 		case RIGHT:
@@ -84,6 +87,7 @@ public:
 	void restartSnake() {
 		Snake tempSnake;
 		snakePosition = tempSnake.getSnakeCoor();
+		--lives;
 	} 
 
 	void renderSnake() {
@@ -91,14 +95,25 @@ public:
 		textureSize.h = textureSize.w = 10;
 		if (!snakePosition.empty()) {
 			for (int i = 0; i < snakePosition.size() - 1; ++i) {
-				textureSize.x = snakePosition[i].x * 10;
-				textureSize.y = snakePosition[i].y * 10;
+				textureSize.x = snakePosition[i].column * 10;
+				textureSize.y = snakePosition[i].row * 10;
 				SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::SNAKE_BODY], nullptr, &textureSize);
 			}
-			textureSize.x = snakePosition[snakePosition.size() - 1].x * 10;
-			textureSize.y = snakePosition[snakePosition.size() - 1].y * 10;
+			textureSize.x = snakePosition[snakePosition.size() - 1].column * 10;
+			textureSize.y = snakePosition[snakePosition.size() - 1].row * 10;
 			SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::SNAKE_HEAD], nullptr, &textureSize);
 		}
+	}
+
+	void renderLives() {
+		SDL_Rect textureSize;
+		textureSize.w = textureSize.h = 20;
+		textureSize.y = 3;
+		if (lives >= 1) textureSize.x = 5 * 10;	SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::HEART], nullptr, &textureSize);
+		if (lives >= 2) textureSize.x = 8 * 10; SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::HEART], nullptr, &textureSize);
+		if(lives >=3) textureSize.x = 11 * 10; SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::HEART], nullptr, &textureSize);
+
+
 	}
 
 

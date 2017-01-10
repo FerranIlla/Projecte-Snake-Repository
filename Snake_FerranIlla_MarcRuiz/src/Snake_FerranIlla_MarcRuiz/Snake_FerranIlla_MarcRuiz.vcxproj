@@ -127,7 +127,6 @@
     <ClInclude Include="IOManager.hh" />
     <ClInclude Include="MenuScene.hh" />
     <ClInclude Include="Renderer.hh" />
-    <ClInclude Include="SceneManager.hh" />
     <ClInclude Include="Snake.hh" />
     <ClInclude Include="TimeManager.hh" />
     <ClInclude Include="Transform.hh" />

@@ -6,7 +6,7 @@
 using namespace std;
 
 
-#define W Wall::Instance()
+#define WA Wall::Instance()
 
 //TODO
 class Wall {
@@ -42,8 +42,8 @@ public:
 		textureSize.h = textureSize.w = 10;
 		if (!wallPosition.empty()) {
 			for (int i = 0; i < wallPosition.size(); ++i) {
-				textureSize.x = wallPosition[i].x * 10;
-				textureSize.y = wallPosition[i].y * 10;
+				textureSize.x = wallPosition[i].column * 10;
+				textureSize.y = wallPosition[i].row * 10;
 				SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::WALL], nullptr, &textureSize);
 			}
 		}

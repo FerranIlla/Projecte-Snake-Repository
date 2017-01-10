@@ -4,6 +4,7 @@
 #include <vector>
 #include "Renderer.hh"
 #include <stdlib.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -12,6 +13,7 @@ using namespace std;
 class Food {
 	COOR foodCoor;
 	int counterFoodLeft;
+
 	Food(int maxFood) {
 		foodCoor = { 45,25 };
 		counterFoodLeft = maxFood;
@@ -27,30 +29,46 @@ public:
 		return foodCoor;
 	}
 
-	//TODO
-	void respawnFood(vector<COOR> wall, vector<COOR> snake) {
-		cout << "soc a dins la funcio respawnFood" << endl;
-		vector<COOR> occupedPositions; //sumar els 2 vectors
+	void respawnFood(vector<COOR> &wall, vector<COOR> &snake) {
+		vector<COOR> occupedPositions;
+		occupedPositions.resize(wall.size() + snake.size());
+		//add both vectors
 		for (int i = 0; i < wall.size(); ++i) {
-			occupedPositions.push_back(wall[i]);
+			occupedPositions[i] = wall[i];
 		}
 		for (int i = 0; i < snake.size(); ++i) {
-			occupedPositions.push_back(snake[i]);
+			occupedPositions[i+wall.size()] = snake[i];
 		}
 
-		cout << "he omplert tots els valors de occupedPosition" << endl;
+		//ordenant de petit a gran
+		sort(occupedPositions.begin(), occupedPositions.end());
+		//he fet un cout, i està ordenat
 
 		vector<COOR> freePositions;
-		for (int i = 0; i < GRID_WIDTH; ++i) {
-			for (int j = 0; j < GRID_HEIGHT; ++j) {
-				for (int k = 0; k < occupedPositions.size(); ++k) {
-					if (i != occupedPositions[k].x || j != occupedPositions[k].y) freePositions.push_back({ i,j });
+		bool found = false;
+		//freePositions.resize(64 * 48 - occupedPositions.size());
+		int it = 0;
+		for (int i = 0; i < GRID_HEIGHT; ++i) {
+			for (int j = 0; j < GRID_WIDTH; ++j) {
+				if (occupedPositions[it].column == j && occupedPositions[it].row == i) {
+					++it;
+				}
+				else {
+					freePositions.push_back({ j,i });
 				}
 			}
 		}
+		
+		/*cout << "freePositions vector: " << endl;
+		for (int i = 0; i < freePositions.size(); ++i) {
+			cout << freePositions[i].column << "," << freePositions[i].row << " ";
+		}*/
+
 		int randomNumber = rand() % (freePositions.size()-1);
-		foodCoor.x = freePositions[randomNumber].x;
-		foodCoor.y = freePositions[randomNumber].y;
+		foodCoor.column = freePositions[randomNumber].column;
+		foodCoor.row = freePositions[randomNumber].row;
+		
+		cout << endl << "Food Pos: (" << foodCoor.column << "," << foodCoor.row << ")" << endl;
 		--counterFoodLeft;
 	}
 
@@ -58,11 +76,16 @@ public:
 		return counterFoodLeft;
 	}
 
+	void restartFood() {
+		foodCoor = { 45,25 };
+		//counterFoodLeft = maxFood;
+	}
+
 	void renderFood() {
 		SDL_Rect textureSize;
 		textureSize.h = textureSize.w = 10;
-		textureSize.x = foodCoor.x*10;
-		textureSize.y = foodCoor.y*10;
+		textureSize.x = foodCoor.column*10;
+		textureSize.y = foodCoor.row*10;
 		SDL_RenderCopy(R.GetRenderer(), R.m_textureData[ObjectID::FOOD], nullptr, &textureSize);
 
 	}

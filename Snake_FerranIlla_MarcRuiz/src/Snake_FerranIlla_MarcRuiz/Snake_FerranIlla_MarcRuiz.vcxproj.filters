@@ -16,9 +16,6 @@
     <ClInclude Include="InputManager.hh">
       <Filter>Controller</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.hh">
-      <Filter>Controller</Filter>
-    </ClInclude>
     <ClInclude Include="ID.hh">
       <Filter>Model</Filter>
     </ClInclude>

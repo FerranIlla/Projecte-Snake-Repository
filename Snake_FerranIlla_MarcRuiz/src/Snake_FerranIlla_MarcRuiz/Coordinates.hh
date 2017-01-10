@@ -4,8 +4,14 @@
 #define GRID_HEIGHT 48
 
 struct COOR {
-	int x;
-	int y;
+	int column;
+	int row;
 
-	//bool operator ==() {}
+	bool operator <(COOR rhs) {
+		return (row<rhs.row || (row == rhs.row && column < rhs.column));
+	}
+
+	bool operator ==(COOR rhs) {
+		return(column == rhs.column && row == rhs.row);
+	}
 };
