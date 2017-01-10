@@ -128,7 +128,6 @@
     <ClInclude Include="MenuScene.hh" />
     <ClInclude Include="Renderer.hh" />
     <ClInclude Include="Snake.hh" />
-    <ClInclude Include="TimeManager.hh" />
     <ClInclude Include="Transform.hh" />
     <ClInclude Include="Wall.hh" />
     <ClInclude Include="Window.hh" />

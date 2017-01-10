@@ -11,7 +11,7 @@ using namespace std;
 class Snake {
 	vector<COOR> snakePosition; //last element is the snake head
 	int lives;
-	int score;
+	
 
 	Snake() {
 		snakePosition.push_back({ 17,18 });
@@ -22,6 +22,8 @@ class Snake {
 		score = 0;
 	}
 public:
+	int score;
+
 	inline static Snake &Instance(void) {
 		static Snake snake;
 		return snake;
@@ -131,7 +133,7 @@ public:
 		SDL_Surface* tSurface2 = TTF_RenderText_Solid(R.GetFont<ARIAL>(), to_string(score).c_str(), textColor);
 		SDL_Texture* scoreNumbTexture = SDL_CreateTextureFromSurface(R.GetRenderer(), tSurface2);
 		textPos.x = textPos.x+75, textPos.y = 0 * 10;
-		textPos.w = 10, textPos.h = 20;
+		textPos.w = to_string(score).length()* 10, textPos.h = 20;
 		SDL_RenderCopy(R.GetRenderer(), scoreNumbTexture, nullptr, &textPos);
 	}
 

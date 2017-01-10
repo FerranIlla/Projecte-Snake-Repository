@@ -73,6 +73,7 @@ void Run(string name, int screenWidth, int screenHeight) {
 					S.renderEndText();
 					SDL_RenderPresent(R.GetRenderer());
 					SDL_Delay(1000);
+					
 				}
 				SDL_Delay(2000);
 				S.restartSnake();
@@ -81,6 +82,7 @@ void Run(string name, int screenWidth, int screenHeight) {
 			}
 			else if (snakeEats()) {
 				S.growSnake(lastInput);
+				S.score += 5;
 				F.respawnFood(WA.getWallCoor(),S.getSnakeCoor());
 			}
 			else {

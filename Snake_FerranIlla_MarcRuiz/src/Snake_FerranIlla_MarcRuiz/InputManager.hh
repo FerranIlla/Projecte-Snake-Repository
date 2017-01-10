@@ -30,3 +30,4 @@ void keyboardInput(int &direction, int prohibDirection) {
 		}
 	}
 }
+

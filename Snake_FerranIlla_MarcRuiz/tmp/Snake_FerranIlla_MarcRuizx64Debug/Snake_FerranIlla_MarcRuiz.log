@@ -1,6 +1,7 @@
 ﻿  Main.cpp
 c:\users\ferran illa\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\menuscene.hh(15): warning C4805: '==': unsafe mix of type 'SDL_Keycode' and type 'bool' in operation
 c:\users\ferran illa\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\menuscene.hh(47): warning C4551: function call missing argument list
+c:\users\ferran illa\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\snake.hh(136): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 c:\users\ferran illa\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\food.hh(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 c:\users\ferran illa\documents\github\projecte-snake-repository\snake_ferranilla_marcruiz\src\snake_ferranilla_marcruiz\gameengine.hh(68): warning C4018: '>': signed/unsigned mismatch
   Snake_FerranIlla_MarcRuiz.vcxproj -> C:\Users\Ferran Illa\Documents\GitHub\Projecte-Snake-Repository\Snake_FerranIlla_MarcRuiz\\bin\x64Debug\Snake_FerranIlla_MarcRuiz.exe
