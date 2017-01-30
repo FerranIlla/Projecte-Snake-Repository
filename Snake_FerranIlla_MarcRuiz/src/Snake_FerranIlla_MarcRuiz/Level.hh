@@ -20,25 +20,25 @@ public:
 	int foodCounter;
 	int foodGoal;
 
-	Level(float diffTime) {
+	Level(float diffTime, int foodXML) {
 		score = 0;
 		maxTime = diffTime * 20000;
 		chrono = 0; //60000 ms
 		lvlCounter = 0;
-		foodGoal = 5; //x = 5 where x = initial number of food
+		foodGoal = foodXML; //x = 5 where x = initial number of food
 		foodCounter = 0;
 
 	}
-	inline static Level &Instance(float diffTime = 0) {
-		static Level level(move(diffTime));
+	inline static Level &Instance(float diffTime = 0, int iniFood = 0) {
+		static Level level(move(diffTime), move(iniFood));
 		return level;
 	}
 
-	void nextLevel(int foodXML) {
+	void nextLevel(int initialFood,int foodIncrement) {
 		WA.changeWallStage();
 		++lvlCounter;
 		foodCounter = 0;
-		foodGoal = 5 + (foodXML*lvlCounter);
+		foodGoal = initialFood + (foodIncrement*lvlCounter);
 		restartChrono();
 	}
 

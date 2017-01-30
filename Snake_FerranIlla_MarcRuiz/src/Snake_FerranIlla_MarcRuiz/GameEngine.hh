@@ -47,7 +47,7 @@ void Run(string name, int screenWidth, int screenHeight) {
 		Wall::Instance(wallXML); //Initialize Wall Singleton instance for the first time
 		WA.loadStages();
 
-		Level::Instance(timeXML); //Initialize Level Singleton instance for the first time
+		Level::Instance(timeXML,foodXML); //Initialize Level Singleton instance for the first time
 		L.restartChrono();
 
 		//gameLoop
@@ -87,7 +87,7 @@ void Run(string name, int screenWidth, int screenHeight) {
 					if (L.foodCounter >= L.foodGoal) {
 						SDL_Delay(2000);
 						S.restartSnake();
-						L.nextLevel(foodXML);
+						L.nextLevel(foodXML,incrementXML);
 						lastInput = RIGHT;
 					}
 					else {
