@@ -14,6 +14,7 @@
 #include "GameLoop.hh"
 #include "Wall.hh"
 #include "Food.hh"
+#include "Level.hh"
 using namespace std;
 
 
@@ -38,12 +39,17 @@ void Run(string name, int screenWidth, int screenHeight) {
 
 	int gameScene; //0=easy, 1=normal, 2=hard, 3=exit;
 	menuLoop(gameScene); //menu scene
+
 	if (gameScene != 3) {
 		
 		readDifficultyXml(gameScene); //read data from xml -->timeXML, speedXML, foodXML, wallXML, incrementXML (some of these are not used)
 
 		Wall::Instance(wallXML); //Initialize Wall Singleton instance for the first time
-		
+		WA.loadStages();
+
+		Level::Instance(timeXML); //Initialize Level Singleton instance for the first time
+		L.restartChrono();
+
 		//gameLoop
 		Uint32 lastUpdateTime = SDL_GetTicks();
 		int lastInput = RIGHT; //enum moveDirection with RIGHT, DOWN, LEFT, UP, EXIT as value
@@ -55,13 +61,12 @@ void Run(string name, int screenWidth, int screenHeight) {
 
 			//UPDATE
 			if ((SDL_GetTicks() - lastUpdateTime) > 1000 / speedXML) { //the FPS varies with the speeedXML value
-				//check collisions
-				if (snakeCollides()) {
+				//check if the player lost a life by collisions or time issues
+				if (snakeCollides() || L.getChrono()>=L.getMaxTime()) {
 					if (S.getLives() <= 1) {
 						S.renderEndText();
 						SDL_RenderPresent(R.GetRenderer());
-						SDL_Delay(2700);
-						S.score = 0;
+						SDL_Delay(2500);
 						lastInput = EXIT;
 						gameOver = true;
 
@@ -69,15 +74,27 @@ void Run(string name, int screenWidth, int screenHeight) {
 					if (!gameOver) {
 						SDL_Delay(2000);
 						S.restartSnake();
+						S.loseLife();
 						F.restartFood();
+						L.foodCounter = 0;
+						L.restartChrono();
 						lastInput = RIGHT;
 					}
 				}
 				//check if snake eats an apple
 				else if (snakeEats()) {
-					S.growSnake(lastInput);
-					S.score += 5;
-					F.respawnFood(WA.getWallCoor(), S.getSnakeCoor());
+					++L.foodCounter;
+					if (L.foodCounter >= L.foodGoal) {
+						SDL_Delay(2000);
+						S.restartSnake();
+						L.nextLevel(foodXML);
+						lastInput = RIGHT;
+					}
+					else {
+						S.growSnake(lastInput);
+						L.gainPoints();
+						F.respawnFood(WA.getWallCoor(), S.getSnakeCoor());
+					}
 				}
 				//move snake normally
 				else {
@@ -90,6 +107,7 @@ void Run(string name, int screenWidth, int screenHeight) {
 				case LEFT: prohibitedDirection = RIGHT; break;
 				case UP: prohibitedDirection = DOWN; break;
 				}
+				L.updateChrono();
 			}
 
 			//DRAW
@@ -98,12 +116,24 @@ void Run(string name, int screenWidth, int screenHeight) {
 			S.renderSnake();
 			WA.renderWall();
 			S.renderLives();
-			S.renderScore();
+			L.renderScore();
+			L.renderFoodLeft();
+			L.renderChrono();
 			SDL_RenderPresent(R.GetRenderer());
 
 		}
 	}
 
+	//RANKING
+	Persona player;
+	cout << "Write your name:" << endl;
+	cin >> player.nombre;
+	player.score = L.getScore();
+
+	vector<Persona> localRanking = readRanking();
+	localRanking = updateRanking(localRanking, player);
+	writeRanking(localRanking);
+	printRanking(localRanking);
 
 }
 

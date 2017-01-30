@@ -14,16 +14,13 @@ class Snake {
 	
 
 	Snake() {
-		snakePosition.push_back({ 17,18 });
-		snakePosition.push_back({ 18,18 });
-		snakePosition.push_back({ 19,18 });
-		snakePosition.push_back({ 20,18 });
+		snakePosition.push_back({ 25,18 }); //tail
+		snakePosition.push_back({ 26,18 });
+		snakePosition.push_back({ 27,18 });
+		snakePosition.push_back({ 28,18 }); //head
 		lives = 3;
-		score = 0;
 	}
 public:
-	int score;
-
 	inline static Snake &Instance(void) {
 		static Snake snake;
 		return snake;
@@ -92,8 +89,10 @@ public:
 	void restartSnake() {
 		Snake tempSnake;
 		snakePosition = tempSnake.getSnakeCoor();
+	}
+	void loseLife(){
 		--lives;
-	} 
+	}
 
 	void renderSnake() {
 		SDL_Rect textureSize;
@@ -121,21 +120,6 @@ public:
 
 	}
 
-	void renderScore() {
-		SDL_Color textColor = { 255, 255, 255 };
-		SDL_Rect textPos;
-		SDL_Surface* tSurface1 = TTF_RenderText_Solid(R.GetFont<ARIAL>(), "SCORE: ", textColor);
-		SDL_Texture* scoreTextTexture = SDL_CreateTextureFromSurface(R.GetRenderer(), tSurface1);
-		textPos.x = 45 * 10, textPos.y = 0 * 10;
-		textPos.w = 70, textPos.h = 20;
-		SDL_RenderCopy(R.GetRenderer(), scoreTextTexture, nullptr, &textPos);
-
-		SDL_Surface* tSurface2 = TTF_RenderText_Solid(R.GetFont<ARIAL>(), to_string(score).c_str(), textColor);
-		SDL_Texture* scoreNumbTexture = SDL_CreateTextureFromSurface(R.GetRenderer(), tSurface2);
-		textPos.x = textPos.x+75, textPos.y = 0 * 10;
-		textPos.w = to_string(score).length()* 10, textPos.h = 20;
-		SDL_RenderCopy(R.GetRenderer(), scoreNumbTexture, nullptr, &textPos);
-	}
 
 	void renderEndText() {
 		SDL_Color textColor = { 255, 255, 255 };

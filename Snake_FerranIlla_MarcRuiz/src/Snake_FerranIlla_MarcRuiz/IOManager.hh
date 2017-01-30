@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include<algorithm>
 #include <XML\rapidxml_utils.hpp>
 #include <XML\rapidxml_iterators.hpp>
 #include <XML\rapidxml_print.hpp>
@@ -97,3 +98,49 @@ void readDifficultyXml(int diff) {
 
 }
 
+struct Persona {
+	string nombre;
+	int score;
+	bool operator <(Persona aux) {
+		return (score < aux.score);
+	};
+};
+
+void writeRanking(vector<Persona> playerData) {
+	ofstream updatefile("../../res/ranking.bin", ios::out | ios::binary);
+	for (int i = 0; i < playerData.size(); i++) {
+		updatefile.write(playerData[i].nombre.c_str(), playerData[i].nombre.size()); // Write string to binary file
+		updatefile.write("\0", sizeof(char)); // Add null end string for easier reading
+		updatefile.write(reinterpret_cast<char*>(&playerData[i].score), sizeof(playerData[i].score)); // Write int to binary file
+	}
+	updatefile.close();
+}
+
+vector<Persona> readRanking() {//s'imprimeix per consola
+	vector<Persona> ranking;
+	ranking.resize(10);
+	ifstream loadfile("../../res/ranking.bin", ios::in | ios::binary);
+	for (int i = 0; i < ranking.size(); i++) {
+		getline(loadfile, ranking[i].nombre, '\0'); // Get player name (only if null ternimated in binary)
+		loadfile.read(reinterpret_cast<char*>(&ranking[i].score), sizeof(ranking[i].score)); // Read int bytes
+
+	}
+	loadfile.close();
+	return ranking;
+}
+
+vector<Persona> updateRanking(vector<Persona> r, Persona playerData) {
+	
+	r.push_back(playerData);
+	sort(r.rbegin(), r.rend());
+	r.pop_back();
+
+	return r;
+}
+
+void printRanking(vector<Persona> r) {
+	cout << "----------RANKING----------" << endl;
+	for (int i = 0; i < r.size(); i++) {
+		cout << "Player: { " << r[i].nombre << ", " << r[i].score << " }" << endl; //Show the ranking 
+	}
+}

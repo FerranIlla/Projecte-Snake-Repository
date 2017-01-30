@@ -40,6 +40,9 @@
     <ClInclude Include="GameLoop.hh">
       <Filter>Controller</Filter>
     </ClInclude>
+    <ClInclude Include="Level.hh">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="View">

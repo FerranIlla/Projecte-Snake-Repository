@@ -62,8 +62,6 @@ public:
 		int randomNumber = rand() % (freePositions.size()-1);
 		foodCoor.column = freePositions[randomNumber].column;
 		foodCoor.row = freePositions[randomNumber].row;
-		
-		cout << endl << "Food Pos: (" << foodCoor.column << "," << foodCoor.row << ")" << endl;
 		--counterFoodLeft;
 	}
 

@@ -12,7 +12,7 @@ bool snakeCollides() {
 	//snakes collides with wall
 	for (int i = 0; i < WA.getWallCoor().size(); ++i) {
 		if (S.getSnakeCoor().back() == WA.getWallCoor()[i]) {
-			cout << "with wall" << endl;
+			cout << "collision with wall" << endl;
 			return true;
 		}
 	}
@@ -20,7 +20,7 @@ bool snakeCollides() {
 	//snakes collides with snake
 	for (int j = 0; j < S.getSnakeCoor().size() - 4; ++j) {
 		if (S.getSnakeCoor().back() == S.getSnakeCoor()[j]) {
-			cout << "with snake" << endl;
+			cout << "collision with snake" << endl;
 			return true;
 		}
 	}
